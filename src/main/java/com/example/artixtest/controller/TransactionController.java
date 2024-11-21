@@ -5,6 +5,7 @@ import com.example.artixtest.dto.TransactionDto;
 import com.example.artixtest.service.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class TransactionController {
 
     private final TransactionService transactionService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/return")
     public ResponseEntity<MessageResponse> transactionReturn(
             @RequestParam(value = "transactionId") Long transactionId
